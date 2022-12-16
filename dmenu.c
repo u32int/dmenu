@@ -156,7 +156,7 @@ drawhighlights(struct item *item, int x, int y, int maxw)
 			if (indentx - (lrpad / 2) - 1 < maxw)
 				drw_text(
 					drw,
-					x + indentx - (lrpad / 2) - 1,
+					x + indentx - (lrpad / 2) - ((drw->fonts->h) % 2),
 					y,
 					MIN(maxw - indentx, TEXTW(highlight) - lrpad),
 					bh, 0, highlight, 0
@@ -810,6 +810,14 @@ main(int argc, char *argv[])
 			colors[SchemeSel][ColBg] = argv[++i];
 		else if (!strcmp(argv[i], "-sf"))  /* selected foreground color */
 			colors[SchemeSel][ColFg] = argv[++i];
+		else if (!strcmp(argv[i], "-shb"))  /* selected highlight background color */
+			colors[SchemeSelHighlight][ColBg] = argv[++i];
+		else if (!strcmp(argv[i], "-shf"))  /* selected highlight foreground color */
+			colors[SchemeSelHighlight][ColFg] = argv[++i];
+		else if (!strcmp(argv[i], "-nhb"))  /* normal highlight background color */
+			colors[SchemeNormHighlight][ColBg] = argv[++i];
+		else if (!strcmp(argv[i], "-nhf"))  /* normal highlight foreground color */
+			colors[SchemeNormHighlight][ColFg] = argv[++i];
 		else if (!strcmp(argv[i], "-w"))   /* embedding window id */
 			embed = argv[++i];
 		else
